@@ -18,5 +18,5 @@ console.log(`city is ${place} and temp gonna be--${temp}`);
 
 
 const somewhere=["1234 cali st","philadelphia","pennsylvania","192451"];
-const [placee,state,cityy,num]=address;
+const [placee,state,cityy,num]=somewhere;
 console.log(placee,state,cityy,num);
