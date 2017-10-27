@@ -23014,21 +23014,40 @@ console.log(me.getDescription());
 "use strict";
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _redux = __webpack_require__(198);
 
-var reducer = function reducer(state, action) {
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var initialState = {
+    result: 1,
+    lastValues: [],
+    username: "max"
+};
+
+var reducer = function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+    var action = arguments[1];
+
     switch (action.type) {
         case "ADD":
-            state = state + action.payload;
+            state = _extends({}, state, {
+                result: state.result + action.payload,
+                lastValues: [].concat(_toConsumableArray(state.lastValues), [action.payload])
+            });
             break;
         case "SUBSTRACT":
-            state = state - action.payload;
+            state = _extends({}, state, {
+                result: state.result - action.payload,
+                lastValues: [].concat(_toConsumableArray(state.lastValues), [action.payload])
+            });
             break;
     }
     return state;
 };
 
-var store = (0, _redux.createStore)(reducer, 1);
+var store = (0, _redux.createStore)(reducer);
 
 store.subscribe(function () {
     console.log("store updated", store.getState());
@@ -23036,7 +23055,7 @@ store.subscribe(function () {
 
 store.dispatch({
     type: "ADD",
-    payload: 10
+    payload: 100
 });
 
 store.dispatch({
@@ -23661,8 +23680,6 @@ function applyMiddleware() {
 "use strict";
 
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var person = {
   name: "mikel",
   age: 27,
@@ -23687,13 +23704,10 @@ if (place && temp) {
 };
 
 var somewhere = ["1234 cali st", "philadelphia", "pennsylvania", "192451"];
-
-var _address = address,
-    _address2 = _slicedToArray(_address, 4),
-    placee = _address2[0],
-    state = _address2[1],
-    cityy = _address2[2],
-    num = _address2[3];
+var placee = somewhere[0],
+    state = somewhere[1],
+    cityy = somewhere[2],
+    num = somewhere[3];
 
 console.log(placee, state, cityy, num);
 
